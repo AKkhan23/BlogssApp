@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  /* TipTap editor styles */
+  .ProseMirror {
+    @apply outline-none;
+  }
+
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    @apply text-gray-400 float-left h-0 pointer-events-none;
+  }
+
+  .ProseMirror > * + * {
+    @apply mt-4;
+  }
+
+  .ProseMirror h1 { @apply text-3xl font-bold; }
+  .ProseMirror h2 { @apply text-2xl font-bold; }
+  .ProseMirror h3 { @apply text-xl font-bold; }
+
+  .ProseMirror ul { @apply list-disc pl-6; }
+  .ProseMirror ol { @apply list-decimal pl-6; }
+
+  .ProseMirror blockquote {
+    @apply border-l-4 border-blue-400 pl-4 italic text-gray-600 dark:text-gray-300;
+  }
+
+  .ProseMirror code {
+    @apply bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .ProseMirror pre {
+    @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto;
+  }
+
+  .ProseMirror pre code {
+    @apply bg-transparent p-0;
+  }
+}
