@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
+import mongoose, { Document, Schema, Model } from "mongoose";
 
 export interface IComment {
   _id: mongoose.Types.ObjectId;
@@ -22,29 +22,25 @@ export interface IPostDocument extends Document {
 
 const commentSchema = new Schema<IComment>(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     text: {
       type: String,
-      required: [true, 'Comment text is required'],
+      required: [true, "Comment text is required"],
       trim: true,
-      maxlength: [1000, 'Comment cannot exceed 1000 characters'],
+      maxlength: [1000, "Comment cannot exceed 1000 characters"],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const postSchema = new Schema<IPostDocument>(
   {
     title: {
       type: String,
-      required: [true, 'Title is required'],
+      required: [true, "Title is required"],
       trim: true,
-      minlength: [5, 'Title must be at least 5 characters'],
-      maxlength: [200, 'Title cannot exceed 200 characters'],
+      minlength: [5, "Title must be at least 5 characters"],
+      maxlength: [200, "Title cannot exceed 200 characters"],
     },
     slug: {
       type: String,
@@ -55,48 +51,35 @@ const postSchema = new Schema<IPostDocument>(
     },
     content: {
       type: String,
-      required: [true, 'Content is required'],
-      minlength: [10, 'Content must be at least 10 characters'],
+      required: [true, "Content is required"],
+      minlength: [10, "Content must be at least 10 characters"],
     },
-    coverImage: {
-      type: String,
-      default: null,
-    },
+    coverImage: { type: String, default: null },
     author: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, 'Author is required'],
-      index: true,
+      ref: "User",
+      required: [true, "Author is required"],
     },
-    likes: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
+    likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
     comments: [commentSchema],
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true },
 );
 
-// Indexes for performance
-postSchema.index({ slug: 1 });
-postSchema.index({ title: 'text', content: 'text' });
+postSchema.index({ title: "text", content: "text" });
 postSchema.index({ author: 1, createdAt: -1 });
 postSchema.index({ createdAt: -1 });
 
-// Remove __v from responses
-postSchema.set('toJSON', {
-  transform: (_doc, ret) => {
-    delete ret.__v;
+postSchema.set("toJSON", {
+  transform: (_doc, ret: any) => {
+    if (ret.__v) {
+      delete ret.__v;
+    }
     return ret;
   },
 });
 
 const Post: Model<IPostDocument> =
-  mongoose.models.Post ??
-  mongoose.model<IPostDocument>('Post', postSchema);
+  mongoose.models.Post ?? mongoose.model<IPostDocument>("Post", postSchema);
 
 export default Post;
