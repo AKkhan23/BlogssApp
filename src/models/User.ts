@@ -55,8 +55,10 @@ userSchema.methods.comparePassword = async function (
 };
 
 // Remove password from JSON responses
-userSchema.set('toJSON', {
-  transform: (_doc, ret) => {
+userSchema.set("toJSON", {
+  transform: function (_doc, ret: any) {
+    ret.id = ret._id.toString();
+    delete ret._id;
     delete ret.password;
     delete ret.__v;
     return ret;
@@ -65,6 +67,6 @@ userSchema.set('toJSON', {
 
 const User: Model<IUserDocument> =
   mongoose.models.User ??
-  mongoose.model<IUserDocument>('User', userSchema);
+  mongoose.model<IUserDocument>("User", userSchema);
 
 export default User;
