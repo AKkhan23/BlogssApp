@@ -1,26 +1,26 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { AuthProvider } from '@/components/providers/AuthProvider';
-import { Toaster } from 'react-hot-toast';
-import './globals.css';
+ import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { AuthProvider } from "@/components/providers/AuthProvider";
+import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'BlogApp — Share Your Ideas',
-    template: '%s | BlogApp',
+    default: "BlogApp — Share Your Ideas",
+    template: "%s | BlogApp",
   },
   description:
-    'A modern blog platform to share your thoughts and ideas with the world.',
-  keywords: ['blog', 'writing', 'articles', 'Next.js'],
-  authors: [{ name: 'BlogApp' }],
+    "A modern blog platform to share your thoughts and ideas with the world.",
+  keywords: ["blog", "writing", "articles", "Next.js"],
+  authors: [{ name: "BlogApp" }],
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    siteName: 'BlogApp',
+    type: "website",
+    locale: "en_US",
+    siteName: "BlogApp",
   },
 };
 
@@ -47,16 +47,16 @@ export default function RootLayout({
           toastOptions={{
             duration: 4000,
             style: {
-              background: '#1f2937',
-              color: '#fff',
-              borderRadius: '0.75rem',
-              border: '1px solid #374151',
+              background: "#1f2937",
+              color: "#fff",
+              borderRadius: "0.75rem",
+              border: "1px solid #374151",
             },
             success: {
-              iconTheme: { primary: '#10b981', secondary: '#fff' },
+              iconTheme: { primary: "#10b981", secondary: "#fff" },
             },
             error: {
-              iconTheme: { primary: '#ef4444', secondary: '#fff' },
+              iconTheme: { primary: "#ef4444", secondary: "#fff" },
             },
           }}
         />
